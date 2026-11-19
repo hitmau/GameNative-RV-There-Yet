@@ -156,6 +156,7 @@ import app.gamenative.utils.ContainerUtils
 import app.gamenative.utils.downloader.CoreDriverDownloader
 import app.gamenative.utils.protonFixes.CommonControlsV6
 import app.gamenative.utils.CustomGameScanner
+import app.gamenative.utils.RVThereYetProfile
 import app.gamenative.utils.DebugReportUtils
 import app.gamenative.utils.GameSessionId
 import app.gamenative.utils.GuestOutputTail
@@ -5421,6 +5422,17 @@ private fun getWineStartCommand(
             if (drive[0] == "A") {
                 gameFolderPath = drive[1]
                 break
+            }
+        }
+
+        if (executablePath.isNotEmpty() && gameFolderPath != null) {
+            val rvThereYet = RVThereYetProfile.detect(File(gameFolderPath))
+            val executableName = executablePath.replace('\\', '/').substringAfterLast('/')
+            if (rvThereYet != null && executableName.equals("Ride.exe", ignoreCase = true)) {
+                Timber.tag("XServerScreen").i("Replacing RV There Yet bootstrapper with Shipping executable")
+                executablePath = rvThereYet.executableRelativePath
+                container.executablePath = executablePath
+                container.saveData()
             }
         }
 

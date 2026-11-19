@@ -179,6 +179,12 @@ android {
             isShrinkResources = false
             signingConfig = signingConfigs.getByName("debug")
         }
+        create("rvthereyet") {
+            initWith(getByName("debug"))
+            applicationIdSuffix = ".rvthereyet"
+            matchingFallbacks += listOf("debug")
+            resValue("string", "app_name", "GameNative - RV There Yet")
+        }
         release {
             isMinifyEnabled = true
             isShrinkResources = true

@@ -28,6 +28,16 @@
 
 ---
 
+## RV There Yet? experimental branch
+
+This public branch adds a local **Custom Game** profile for RV There Yet?: it validates the Unreal install layout, selects `Ride-Win64-Shipping.exe` instead of the bootstrapper, and includes an ADB transfer/install guide. The Android ARM64 APK builds successfully, but launching the game on a physical Android device has not yet been verified. See the [Português (Brasil) setup guide](docs/RV-THERE-YET-OFFLINE-IMPORT-PT-BR.md).
+
+## Branch experimental para RV There Yet?
+
+Esta branch pública adiciona um perfil **Custom Game** local para RV There Yet?: valida a estrutura da instalação Unreal, seleciona `Ride-Win64-Shipping.exe` em vez do inicializador e inclui instruções de transferência/instalação por ADB. O APK ARM64 compila, mas o lançamento do jogo em um aparelho Android ainda não foi verificado. Consulte o [guia em Português (Brasil)](docs/RV-THERE-YET-OFFLINE-IMPORT-PT-BR.md).
+
+---
+
 GameNative lets you run the PC games in your Steam, Epic and GOG libraries directly on Android — no streaming required. Your saves sync to the cloud, so you can stop on your PC and keep going on your phone.
 
 It's still early. Not every game runs yet, and some need tweaking to play well, but the community is constantly finding and sharing configs that work — and these get applied automatically. You can see if anyone has tried running your game successfully at https://gamenative.app/compatibility.

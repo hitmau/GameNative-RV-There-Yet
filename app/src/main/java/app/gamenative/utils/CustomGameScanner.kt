@@ -416,8 +416,16 @@ object CustomGameScanner {
      */
     fun getLaunchExecutable(container: Container): String {
         val exe = container.executablePath
+        val gameFolderPath = ContainerUtils.getADrivePath(container.drives)
+        val rvThereYet = gameFolderPath?.let { RVThereYetProfile.detect(File(it)) }
+        val currentExeName = exe.replace('\\', '/').substringAfterLast('/')
+        if (rvThereYet != null &&
+            (exe.isBlank() || currentExeName.equals("Ride.exe", ignoreCase = true))
+        ) {
+            return rvThereYet.executableRelativePath
+        }
         if (ContainerUtils.isAbsoluteWindowsPath(exe)) return exe
-        val gameFolderPath = ContainerUtils.getADrivePath(container.drives) ?: return ""
+        if (gameFolderPath == null) return ""
         if (exe.isNotEmpty()) {
             val fullPath = File(gameFolderPath, exe.replace('\\', File.separatorChar))
             if (fullPath.exists() && fullPath.isFile) return exe
@@ -428,6 +436,10 @@ object CustomGameScanner {
 
     fun findUniqueExeRelativeToFolder(folder: File): String? {
         if (!folder.exists() || !folder.isDirectory) return null
+
+        // RV There Yet ships a small root Ride.exe bootstrapper plus its real
+        // Unreal Shipping executable several levels down. Prefer the latter.
+        RVThereYetProfile.detect(folder)?.let { return it.executableRelativePath }
 
         fun File.isValidExe(): Boolean = this.isFile && this.name.endsWith(".exe", ignoreCase = true) &&
             !this.name.startsWith("unins", ignoreCase = true)
@@ -491,6 +503,8 @@ object CustomGameScanner {
                 candidates.add(rel)
             }
         }
+
+        RVThereYetProfile.detect(folder)?.let { candidates.add(it.executableRelativePath) }
 
         return candidates.distinct()
     }
@@ -680,7 +694,11 @@ object CustomGameScanner {
             return null
         }
 
-        if (SteamService.instance != null && PrefManager.importCustomGameAsSteamGame) {
+        // Always keep RV There Yet on the local Custom Game path. The transfer
+        // flow must not require a Steam library session; the game itself may
+        // still request Steam/EOS for services it owns.
+        val isRVThereYet = RVThereYetProfile.detect(folder) != null
+        if (!isRVThereYet && SteamService.instance != null && PrefManager.importCustomGameAsSteamGame) {
             val steamApps = SteamService.findSteamAppWithInstallDir(dirName = folder.name)
             if (steamApps?.size == 1) {
                 val steamApp = steamApps[0]
@@ -735,7 +753,7 @@ object CustomGameScanner {
         return LibraryItem(
             index = 0,
             appId = appId,
-            name = folder.name,
+            name = RVThereYetProfile.displayName(folder),
             iconHash = "",
             isShared = false,
             gameSource = GameSource.CUSTOM_GAME,

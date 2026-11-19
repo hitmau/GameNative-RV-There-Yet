@@ -1149,6 +1149,15 @@ object ContainerUtils {
                         container.executablePath = auto
                         container.saveData()
                     }
+                } else if (!gameFolderPath.isNullOrEmpty()) {
+                    val rvThereYet = RVThereYetProfile.detect(File(gameFolderPath))
+                    val currentExe = container.executablePath.replace('\\', '/')
+                    val currentExeName = currentExe.substringAfterLast('/')
+                    if (rvThereYet != null && currentExeName.equals("Ride.exe", ignoreCase = true)) {
+                        Timber.i("Replacing RV There Yet bootstrapper with its Shipping executable")
+                        container.executablePath = rvThereYet.executableRelativePath
+                        container.saveData()
+                    }
                 }
             } catch (e: Exception) {
                 Timber.w(e, "Failed to auto-select exe during Custom Game creation for $appId")
@@ -1785,7 +1794,10 @@ object ContainerUtils {
             GameSource.CUSTOM_GAME -> {
                 val customAppId = "${GameSource.CUSTOM_GAME.name}_$gameId"
                 CustomGameScanner.getFolderPathFromAppId(customAppId)
-                    ?.let { File(it).name }
+                    ?.let { folderPath ->
+                        val folder = File(folderPath)
+                        RVThereYetProfile.displayName(folder)
+                    }
             }
         } ?: "Unknown"
     }
