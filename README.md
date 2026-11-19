@@ -2,6 +2,8 @@
 
 # GameNative
 
+[English](README.md) · [Português (Brasil)](README.pt-BR.md)
+
 **Play the PC games you already own — from Steam, Epic and GOG — on your Android device, with cloud saves.**
 
 <a href="https://trendshift.io/repositories/14497" target="_blank"><img src="https://trendshift.io/api/badge/repositories/14497" alt="utkarshdalal%2FGameNative | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
@@ -22,7 +24,9 @@
 
 [**Download**](https://github.com/utkarshdalal/GameNative/releases/download/v1.4.0/gamenative-v1.4.0.apk) · [**Discord**](https://discord.gg/2hKv4VfZfE) · [**Become a member**](https://ko-fi.com/gamenative)
 
-<video src="https://github.com/user-attachments/assets/95b5397b-908a-44ef-a10a-dac7723580b0" autoplay loop muted playsinline width="100%"></video>
+<a href="https://youtu.be/QqIChmAu2_A?si=Ha6xzTQXZA2H8HUN&t=53" target="_blank"><img src="https://img.youtube.com/vi/QqIChmAu2_A/hqdefault.jpg" alt="Watch the GameNative demo on YouTube" width="560"></a>
+
+<p>Click the thumbnail to watch the GameNative demo on YouTube.</p>
 
 </div>
 
@@ -42,16 +46,6 @@ It's still early. Not every game runs yet, and some need tweaking to play well, 
 - Active support over Discord if you need help getting a game running
 - Optimize: games tuned to your device (members)
 - AI help that finds and fixes what's stopping a game from running (members)
-
-## Demo
-
-[TechDweeb](https://www.youtube.com/@TechDweeb) walks through setting up GameNative on an Android handheld in a couple of minutes:
-
-<div align="center">
-
-<a href="https://youtu.be/QqIChmAu2_A?si=Ha6xzTQXZA2H8HUN&t=53" target="_blank"><img src="https://github.com/user-attachments/assets/6957e3a1-34ac-41f5-b558-0f1868dbf3d4" alt="Youtube Video" /></a>
-
-</div>
 
 ## How to use
 
