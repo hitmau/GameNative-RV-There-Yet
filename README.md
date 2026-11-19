@@ -1,148 +1,130 @@
-<div align="center">
+# GameNative + RV There Yet?
 
-# GameNative
+**Uma adaptação experimental do [GameNative](https://github.com/utkarshdalal/GameNative) para importar uma cópia local de RV There Yet? no Android.**
 
-**Play the PC games you already own — from Steam, Epic and GOG — on your Android device, with cloud saves.**
+[![Branch experimental](https://img.shields.io/badge/status-experimental-orange)](https://github.com/hitmau/GameNative-RV-There-Yet/tree/codex/rv-there-yet-offline-import)
+[![Android ARM64](https://img.shields.io/badge/Android-ARM64-3DDC84?logo=android&logoColor=white)](https://developer.android.com/ndk/guides/abis)
+[![Licença GPL-3.0](https://img.shields.io/badge/licen%C3%A7a-GPL--3.0-blue)](LICENSE)
 
-<a href="https://trendshift.io/repositories/14497" target="_blank"><img src="https://trendshift.io/api/badge/repositories/14497" alt="utkarshdalal%2FGameNative | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
+Esta branch prepara o GameNative para reconhecer a instalação Windows do jogo, escolher o executável correto e importar os arquivos locais. **Ainda não foi comprovado que RV There Yet? inicia ou funciona em um aparelho Android.**
 
-<a href="https://www.star-history.com/utkarshdalal/gamenative">
- <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/badge?repo=utkarshdalal/GameNative&theme=dark" />
-  <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/badge?repo=utkarshdalal/GameNative" />
-  <img alt="Star History Rank" src="https://api.star-history.com/badge?repo=utkarshdalal/GameNative" />
- </picture>
-</a>
+<p align="center">
+  <img src="img.png" alt="Arte promocional do GameNative; não representa uma captura desta adaptação" width="720">
+</p>
 
-[![GitHub Release](https://img.shields.io/github/v/release/utkarshdalal/GameNative?style=flat-square&logo=github&label=latest)](https://github.com/utkarshdalal/GameNative/releases/latest)
-[![GitHub stars](https://img.shields.io/github/stars/utkarshdalal/GameNative?style=flat-square&logo=github&color=ffd700)](https://github.com/utkarshdalal/GameNative/stargazers)
-[![Discord](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscord.com%2Fapi%2Fv9%2Finvites%2F2hKv4VfZfE%3Fwith_counts%3Dtrue&query=%24.approximate_member_count&style=flat-square&logo=discord&logoColor=white&label=discord&color=5865F2&suffix=%20members)](https://discord.gg/2hKv4VfZfE)
-[![License](https://img.shields.io/badge/license-GPL%203.0-blue?style=flat-square)](https://github.com/utkarshdalal/GameNative/blob/master/LICENSE)
-[![Membership](https://img.shields.io/badge/ko--fi-membership-FF5E5B?style=flat-square&logo=ko-fi&logoColor=white)](https://ko-fi.com/gamenative)
+> A arte acima é promocional do GameNative. As imagens de RV There Yet? mais abaixo são da versão para PC, na página oficial do Steam; não são capturas do jogo rodando no Android.
 
-[**Download**](https://github.com/utkarshdalal/GameNative/releases/download/v1.4.0/gamenative-v1.4.0.apk) · [**Discord**](https://discord.gg/2hKv4VfZfE) · [**Become a member**](https://ko-fi.com/gamenative)
+## Situação atual
 
-<video src="https://github.com/user-attachments/assets/95b5397b-908a-44ef-a10a-dac7723580b0" autoplay loop muted playsinline width="100%"></video>
+| Parte | Situação |
+| --- | --- |
+| Perfil Custom Game para reconhecer RV There Yet? | Implementado |
+| Seleção automática do executável `Shipping` | Implementada |
+| APK Android ARM64 de depuração | Compila; pode ser instalado em paralelo ao GameNative oficial |
+| Cópia dos arquivos do PC para o Android via ADB | Script disponível; requer Depuração USB autorizada |
+| Importação da pasta no app | Manual, pelo fluxo Custom Game |
+| Inicialização, gráficos, controles e desempenho no celular | **Não verificados em aparelho real** |
+| Login Steam no GameNative para importar a cópia local | Não necessário |
+| Serviços/autenticação que o próprio jogo possa exigir | Não removidos nem verificados |
 
-</div>
+## Imagens do jogo
 
----
+Capturas oficiais da edição para PC, exibidas aqui apenas para identificar o jogo e ilustrar o projeto.
 
-## RV There Yet? experimental branch
+<p align="center">
+  <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3949040/ed2f7080c6622688a72a86ca85af600f2a2bdfb9/ss_ed2f7080c6622688a72a86ca85af600f2a2bdfb9.1920x1080.jpg?t=1789134289" alt="Captura oficial 1 de RV There Yet? para PC" width="32%">
+  <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3949040/7d246f94e4ec2ff4c7be3ded82bcdd558274d7c7/ss_7d246f94e4ec2ff4c7be3ded82bcdd558274d7c7.1920x1080.jpg?t=1789134289" alt="Captura oficial 2 de RV There Yet? para PC" width="32%">
+  <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3949040/f5663e0220e188d4c9db0789f0cbb4ddefd762d5/ss_f5663e0220e188d4c9db0789f0cbb4ddefd762d5.1920x1080.jpg?t=1789134289" alt="Captura oficial 3 de RV There Yet? para PC" width="32%">
+</p>
 
-This public branch adds a local **Custom Game** profile for RV There Yet?: it validates the Unreal install layout, selects `Ride-Win64-Shipping.exe` instead of the bootstrapper, and includes an ADB transfer/install guide. The Android ARM64 APK builds successfully, but launching the game on a physical Android device has not yet been verified. See the [Português (Brasil) setup guide](docs/RV-THERE-YET-OFFLINE-IMPORT-PT-BR.md).
+Fonte das capturas: [página oficial de RV There Yet? no Steam](https://store.steampowered.com/app/3949040/RV_There_Yet/).
 
-## Branch experimental para RV There Yet?
+## O que esta branch acrescenta
 
-Esta branch pública adiciona um perfil **Custom Game** local para RV There Yet?: valida a estrutura da instalação Unreal, seleciona `Ride-Win64-Shipping.exe` em vez do inicializador e inclui instruções de transferência/instalação por ADB. O APK ARM64 compila, mas o lançamento do jogo em um aparelho Android ainda não foi verificado. Consulte o [guia em Português (Brasil)](docs/RV-THERE-YET-OFFLINE-IMPORT-PT-BR.md).
+- Detecta a estrutura da versão para Windows por arquivos do jogo, incluindo o executável real e os arquivos IoStore `.ucas` e `.utoc`.
+- Seleciona `Ride/Binaries/Win64/Ride-Win64-Shipping.exe`, em vez do pequeno `Ride.exe` que atua como inicializador.
+- Cria uma variante Android separada, chamada **GameNative - RV There Yet**, com o identificador `app.gamenative.rvthereyet`.
+- Oferece um script PowerShell que transfere a pasta do jogo por ADB, verifica o tamanho de arquivos importantes e instala o APK.
+- Documenta a importação local e os limites conhecidos em [guia de instalação em Português (Brasil)](docs/RV-THERE-YET-OFFLINE-IMPORT-PT-BR.md).
 
----
+O fluxo é:
 
-GameNative lets you run the PC games in your Steam, Epic and GOG libraries directly on Android — no streaming required. Your saves sync to the cloud, so you can stop on your PC and keep going on your phone.
+```mermaid
+flowchart LR
+    A[Instalação Windows que você possui] -->|ADB: copia arquivos| B[Download no Android]
+    C[APK experimental ARM64] -->|instala em paralelo| D[GameNative - RV There Yet]
+    B -->|seleção manual da pasta Ride| D
+    D --> E[Compatibilidade Wine + FEX]
+    E --> F[Tentativa de iniciar o jogo]
+    F -. ainda precisa de teste em aparelho real .-> G[Compatibilidade não confirmada]
+```
 
-It's still early. Not every game runs yet, and some need tweaking to play well, but the community is constantly finding and sharing configs that work — and these get applied automatically. You can see if anyone has tried running your game successfully at https://gamenative.app/compatibility.
+## Instalação para teste
 
-## What you get
+### Requisitos
 
-- Play games you actually own on Steam, Epic, GOG and Amazon
-- Cloud saves that carry over between your PC and your phone
-- Automatically applied known configs, so many games just work out of the box with no tweaking required
-- Controller and touch support, with a custom control editor and on-screen HUD
-- Steam DLC, workshop and branch support
-- Active support over Discord if you need help getting a game running
-- Optimize: games tuned to your device (members)
-- AI help that finds and fixes what's stopping a game from running (members)
+- Windows com PowerShell e Android SDK Platform Tools (`adb`).
+- Android ARM64 compatível, cabo USB e **Depuração USB** autorizada.
+- Uma cópia legítima e completa do jogo no PC. O repositório não inclui arquivos do jogo.
+- Espaço livre no telefone: o script estima **duas vezes o tamanho da instalação mais 5 GiB** para runtime. A importação cria uma cópia adicional; o cálculo é uma margem, não garantia.
+- Internet na primeira execução, pois o GameNative pode baixar arquivos-base do runtime e componentes gráficos.
 
-## Demo
+### Gerar o APK
 
-[TechDweeb](https://www.youtube.com/@TechDweeb) walks through setting up GameNative on an Android handheld in a couple of minutes:
+Na raiz do repositório, execute:
 
-<div align="center">
+```powershell
+git submodule update --init --recursive
+.\gradlew.bat :app:assembleModernRvthereyet
+```
 
-<a href="https://youtu.be/QqIChmAu2_A?si=Ha6xzTQXZA2H8HUN&t=53" target="_blank"><img src="https://github.com/user-attachments/assets/6957e3a1-34ac-41f5-b558-0f1868dbf3d4" alt="Youtube Video" /></a>
+APK esperado:
 
-</div>
+```text
+app/build/outputs/apk/modern/rvthereyet/app-modern-rvthereyet.apk
+```
 
-## How to use
+É uma compilação de depuração assinada localmente, destinada a teste. Este repositório não oferece um APK de release pronto nesta branch.
 
-1. Download the latest release [here](https://downloads.gamenative.app/releases/1.4.0/gamenative-v1.4.0.apk)
-2. Install the APK on your Android device
-3. Log in to your Steam account
-4. Install your game
-5. Hit play and enjoy
+### Copiar o jogo e instalar o aplicativo
 
-## Support
+O padrão do script aponta para `D:\SteamLibrary\steamapps\common\Ride`. Para usar outro local, informe `-SourcePath`.
 
-The fastest way to get help is the [Discord server](https://discord.gg/2hKv4VfZfE) — we're 35k+ strong and someone's usually around.
+1. Conecte o celular, habilite Depuração USB e aceite a solicitação de autorização exibida no aparelho.
+2. Confira a origem e o espaço necessário com a prévia:
 
-Please **don't** open issues on GitHub; they're closed automatically. Bring it to Discord instead.
-
-[**Become a member**](https://ko-fi.com/gamenative) to get Optimize, AI help and early access builds.
-
-Questions about paid features, or tuning games yourself? See the [FAQ](FAQ.md).
-
-## Contributing
-
-Want to help out? Message us to get into the **#development** channel on [Discord](https://discord.gg/2hKv4VfZfE), or open a thread there. Things we're currently looking for help with live on our [Trello board](https://trello.com/b/vGRkFoAM/open-source-board).
-
-### Fix a game that doesn't work
-
-Every night we publish the list of games that don't run in GameNative, built from real usage data, at [GameNative/gamenative-compat](https://github.com/GameNative/gamenative-compat). Each broken game has [an open issue](https://github.com/GameNative/gamenative-compat/issues?q=is%3Aopen+label%3Adoes-not-work) with the numbers behind it: how many players hit it, what they report, whether the game window ever renders.
-
-If you want to take one on:
-
-1. Pick a game from the list and open its issue. Check the comments to see whether someone is already on it, then leave a comment saying you are taking it.
-2. Work out why it fails. Most fixes land in this repo, in [proton-wine](https://github.com/GameNative/proton-wine), in [FEX](https://github.com/GameNative/FEX), in the GPU driver wrappers or in the per-game config.
-3. Open a pull request in the right repo, then comment on the game's issue with a link to it. Once the fix ships and players start getting the game to run, the issue closes itself.
-
-Own a broken game and want to donate a key so someone can fix it? Email [support@gamenative.app](mailto:support@gamenative.app).
-
-### Building
-
-Most of the time you don't need this — if you just want to play, grab the release above. This is for contributors.
-
-1. After cloning, fetch the submodules (the vendored leveldb and snappy-java are built from them):
-   ```sh
-   git submodule update --init --recursive
+   ```powershell
+   .\tools\transfer_rv_there_yet.ps1 -SourcePath 'D:\SteamLibrary\steamapps\common\Ride' -WhatIf
    ```
-2. Build it like any normal Android Studio project. Ask on Discord if you get stuck.
-3. **SteamGridDB API key (optional):** to pull game artwork for custom games, add your key to `local.properties`:
-   ```properties
-   STEAMGRIDDB_API_KEY=your_api_key_here
+
+3. Se a prévia estiver correta, transfira os arquivos e instale o APK:
+
+   ```powershell
+   .\tools\transfer_rv_there_yet.ps1 -SourcePath 'D:\SteamLibrary\steamapps\common\Ride'
    ```
-   You can get one from your [SteamGridDB preferences](https://www.steamgriddb.com/profile/preferences). Without it everything still works — it just won't fetch images.
 
-## Analytics & privacy
+4. No Android, abra **GameNative - RV There Yet**, acesse a biblioteca local, escolha **Custom Game** e selecione a pasta `Ride` copiada para `Download`.
+5. Importe sem apagar a origem e tente iniciar o jogo. A importação pelo app e a primeira execução ainda precisam ser confirmadas no dispositivo.
 
-GameNative uses [PostHog](https://posthog.com) for anonymous analytics. No personal information is ever collected — no names, emails, IPs or device identifiers.
+Para apenas copiar os arquivos e instalar o APK manualmente, acrescente `-SkipAppInstall`. Consulte opções adicionais, como `-DeviceSerial` e `-RuntimeReserveGiB`, no [guia completo](docs/RV-THERE-YET-OFFLINE-IMPORT-PT-BR.md).
 
-**Always collected**, to improve game compatibility:
-- Game launch, close and exit events (game name, store, session length, average FPS, container config)
-- Game install, cancel and uninstall events
+## Limites importantes
 
-This is how we figure out which games work, how well they run, and which configs to apply automatically for the next person. It can't identify you.
+- O APK não contém o jogo, o runtime Wine nem o driver gráfico. O usuário fornece os arquivos da própria instalação e o app prepara dependências separadamente.
+- A importação local evita entrar na conta Steam **no GameNative** para adicionar a pasta. Não elimina DRM, serviços Steam/EOS ou requisitos de rede do próprio jogo.
+- A presença de DLLs Steam/EOS na instalação pode afetar login, recursos online e multiplayer. Esses recursos não foram testados.
+- Requisitos de GPU listados para PC não predizem, por si só, compatibilidade ou desempenho no Android. Consulte os [requisitos oficiais](https://store.steampowered.com/app/3949040/RV_There_Yet/).
+- O APK ARM64 e o perfil foram verificados no processo de desenvolvimento, mas a experiência completa — instalação no celular, importação, abertura, áudio, imagem, controles e FPS — depende de teste em dispositivo real.
+- Este trabalho não traduz toda a interface do GameNative para Português (Brasil); o guia e este README estão em português.
 
-**Optional**, and switchable under *Settings → Info → Usage Analytics*:
-- Feature usage (on-screen keyboard, controller, HUD, control editor)
-- Login success/failure events
-- Recommendation interactions
-- App lifecycle events (foreground/background)
-- Cloud sync events
+## Relação com Skyrim Android
 
-The full [Privacy Policy](PrivacyPolicy/README.md) has the details.
+O projeto [Skyrim Android](https://github.com/ttom795/Skyrim_Android) serviu como referência para o fluxo de escolher uma pasta própria e conferir os arquivos antes de iniciar. A implementação técnica de Skyrim é específica daquele jogo e não é um runtime que possa ser reaproveitado para RV There Yet?. Esta branch não copia código nem arquivos de Skyrim.
 
-## Sponsors
+## Projeto original, contribuição e licença
 
-GameNative is sponsored by [CodeRabbit](https://coderabbit.link/gnative).
+Esta é uma fork experimental de [GameNative](https://github.com/utkarshdalal/GameNative), cujo objetivo original é executar jogos de PC em dispositivos Android. As mudanças desta branch são uma adaptação comunitária e ainda não foram aceitas pelo projeto original.
 
-[![Star History Chart](https://star-history.dera.page/svg?repos=utkarshdalal/GameNative&type=Date&theme=dark)](https://star-history.dera.page/#utkarshdalal/GameNative&Date)
+O código segue a [licença GPL-3.0](LICENSE) e os avisos de terceiros em [THIRD_PARTY_NOTICES](THIRD_PARTY_NOTICES). Consulte também o repositório original para informações gerais, contribuições e suporte.
 
-## License
-
-[GPL 3.0](https://github.com/utkarshdalal/GameNative/blob/master/LICENSE).
-
-See [THIRD_PARTY_NOTICES](THIRD_PARTY_NOTICES) for attributions, copyleft source offers, and notices about third-party and proprietary components bundled with the app.
-
----
-
-**Disclaimer:** This software is meant for playing games that you legally own. Don't use it for piracy or anything else illegal. The maintainer takes no responsibility for misuse.
+**Use apenas cópias de jogos que você tem direito de utilizar.** Nenhum conteúdo protegido de RV There Yet? é distribuído nesta fork.
